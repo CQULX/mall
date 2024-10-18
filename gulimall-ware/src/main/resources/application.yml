@@ -1,0 +1,47 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.56.128:3306/gulimall_wms
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  rabbitmq:
+    host: 192.168.56.128
+    port: 5672
+    virtual-host: /
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    template:
+      mandatory: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  application:
+    name: gulimall-ware
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+server:
+  port: 11000
+logging:
+  level:
+    com.lx: debug
+
+seata:
+  tx-service-group: gulimall-ware-group
+  service:
+    vgroup-mapping:
+      gulimall-ware-group: default
+  registry:
+    type: nacos
+    nacos:
+      server-addr: localhost:8848
+      application: seata-server
+      group: DEFAULT_GROUP

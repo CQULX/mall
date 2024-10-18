@@ -1,0 +1,56 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.56.128:3306/gulimall_oms
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: 192.168.56.128
+      port: 6379
+      lettuce:
+        cluster:
+          refresh:
+            adaptive: true
+            period: 20
+
+  rabbitmq:
+    host: 192.168.56.128
+    port: 5672
+    virtual-host: /
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    template:
+      mandatory: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+  main:
+    allow-circular-references: true
+  thymeleaf:
+    cache: false
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  application:
+    name: gulimall-order
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+server:
+  port: 9000
+seata:
+  tx-service-group: gulimall-order-group
+  service:
+    vgroup-mapping:
+      gulimall-order-group: default
+  registry:
+    type: nacos
+    nacos:
+      server-addr: localhost:8848
+      application: seata-server
+      group: DEFAULT_GROUP

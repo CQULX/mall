@@ -1,0 +1,44 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.56.128:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  main:
+    allow-circular-references: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  thymeleaf:
+    cache: false
+  data:
+    redis:
+      host: 192.168.56.128
+      port: 6379
+      lettuce:
+        cluster:
+          refresh:
+            adaptive: true
+            period: 20
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+server:
+  port: 10000
+logging:
+  level:
+    com.lx.gulimall: error
+alibaba:
+  cloud:
+    access-key: LTAI5tQenxPiopwRYL7f948G
+    secret-key: FqvrZabzlUuOr6mWQ6yWXC7MQEWt8h
+    oss:
+      endpoint: https://oss-cn-guangzhou.aliyuncs.com
